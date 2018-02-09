@@ -1,0 +1,330 @@
+
+\section{Outline}
+\begin{enumerate}[(1)]
+\item Outline of class field theory
+\item Abelian $L$-functions (Hecke, Tate)
+\item Non-abelian $L$-functions (Weil-Deligne group, local $L$- and $\epsilon$-
+                                 factors)
+\item Local Langlands program for $GL_n$
+\item Global: automorphic forms and representations
+\end{enumerate}
+
+
+\section{Outline of Class Field Theory}
+
+This is the study of abelian extensions of local/global fields. We first fix
+some notation. If $K$ is a field, $\overline{K}$ will be a separable closure of
+$K$. Also, $\Gamma_K = \gal{\overline{K}}{K} = \varprojlim_{L/K finite} \gal{L}{K}$
+(inverse limit).
+Then this is a profinite group with the Krull topology. Galois theory gives us
+two bijections:
+\begin{enumerate}[(1)]
+\item Closed subgroups of $\Gamma_K$ with subfields $K \subset L \subset
+\overline{K}$
+\item Open subgroups correspond to finite extensions $L/K$
+\end{enumerate}
+
+We'll also write $K^{\operatorname{ab}} \subset \overline{K}$ for the maximal
+abelian subextension. Then $\gal{K^{\operatorname{ab}}}{K} =
+\Gamma_K^{\operatorname{ab}} = \Gamma_K/\overline{[\Gamma_K, \Gamma_K]}$.
+Note that $\overline{K}$ is unique up to a (non-unique) isomorphism. So
+$\Gamma_K$ is well-defined up to conjugation, and $\Gamma_K^{\operatorname{ab}}$
+is well-defined.
+
+\subsection{Local Fields} At the moment, let $F$ be a non-archimedean local
+field (finite extension of $\Qp$ or Laurent series in one variable over a finite
+field). This has a normalized valuation $v = v_F : F^\times \rightarrow \Z$.
+Then we get a valuation ring $\mathcal{O} = \mathcal{O}_F$, also the ring of
+integers. Pick a uniformizer $\pi = \pi_F$ ($v(\pi) = 1$). Then let $k = k_F$ be
+the residue field, isomorphic to $\mathbb{F}_q$, where $q = p^r$. 
+
+Within $\overline{F} \subset F^{\operatorname{ab}} \subset
+F^{\operatorname{ur}}$, the maximal unramified extension of $F$. Within
+$\Gamma_F$ we have $I_F = \gal{\overline{F}}{F^{\operatorname{nr}}}$, and within
+that $P_F$ the wild inertia group (maximal proper subgroup of $I_F$).
+
+Now to describe the first layer, which tells us about unramified extensions.
+Then we have an isomorphism \[ \Gamma_F/I_F \longiso \gal{\overline{k}}{k} \longiso
+                              \hat{\ints}\] given by reduction modulo $\pi$.
+Inside the Galois group we have $\varphi_q : x \mapsto x^q$, the arithmetic
+Frobenius map.  It results in infinite confusion to send $1 \mapsto \varphi_q$,
+so it's standard to take $\operatorname{Frob}_q := \varphi_q^{-1}$, called the
+geometric Frobenius. We fix the isomorphism $\gal{\overline{k}}{k} \longiso
+\hat{\ints}$ so that $\operatorname{Frob}_q \mapsto 1$.
+
+Now to describe the second layer (the group $I_F/P_F$), which tells us about
+tamely ramified
+extensions. Fix $\pi_n \in \overline{F}$ with $\pi_n^n = \pi$. Define
+\[ t(n) : I_F = \gal{\overline{F}}{F^{\operatorname{ur}}} \rightarrow
+  \mu_n(\overline{k}), \]
+for $(n, p) = 1$, sending
+\[ \gamma \mapsto \gamma(\pi_n)/\pi_n \pmod{\pi}. \]
+Now this is the tame mod $n$ character, and doesn't actually depend on all the
+choices we made and is a homomorphism $I_F \rightarrow \mu_n(\overline{k})$.
+Assembling all of these together, we obtain a map
+\[ I_F \rightarrow \varprojlim_{(n, p) = 1} \mu_n(\overline{k}) = \prod_{l \neq p}
+  \varprojlim_{m \geq 1} \mu_{l^m}(\overline{k}) = \ints_l(1)(\overline{k}), \] and
+this last one is called the Tate module of $\overline{k}^\times$. Each of these
+is isomorphic to $\ints_l$ but not canonically so. The kernel $\hat{t}$ of this
+map is $\prod_{l \neq p} t_l = P_F$. Equivalently, the maximal tamely ramified
+extension of $F$ is \[ \bigcup_{(n, p) = 1}
+                      F^{\operatorname{nr}}(\sqrt{n}{\pi}), \]
+which is also just Kummer theory.
+
+\begin{rmk}
+This $t(n)$ extends to a map $\Gamma_F \rightarrow \mu_n$, given by the same
+formula, although it is not a homomorphism. Explicitly, \[
+t(n)(\gamma \delta) = \gamma \delta(\pi_n)/\pi_n = \gamma(\pi_n)/ \pi_n
+\gamma(\dfrac{\delta(\pi_n)}{\pi_n}) = t(n)(\gamma) \gamma(t(n) \delta) =
+t(n)(\delta), \] where this last equality holds if $\gamma \in I_F$, but not in
+general. This means that $t(n)$ is a 1-cocycle.
+\end{rmk}
+
+\subsection{Local Class Field Theory} We'll now just state local class field
+theory. The first part is the following theorem.
+
+\begin{thm}
+There is a unique family of continuous homomorphisms $\operatorname{Art}_F :
+F^\times \to \Gamma_F^{\operatorname{ab}}$ with dense image, characterized by
+\begin{enumerate}[(1)]
+\item $F^\times \rightarrow{\operatorname{Art}_F} \Gamma_F^{\operatorname{ab}}$
+surjects onto $\Gamma_F\I_F$ ``uniformizers map to geometric Frobenius''
+(see photo)
+\item Often called the base-change property: (see other photo)
+\end{enumerate}
+\end{thm}
+
+The second part is the existence theorem.
+
+\begin{thm}
+The inverse of the Artin map $\operatorname{Art}_F^{-1}$ induces a bijection
+between open subgroups of $\Gamma_F^{\operatorname{ab}}$ (finite abelian
+extensions of $F$) and open subgroups of $F^\times$ of finite index.
+\end{thm}
+
+The final part is that if $F = \Qp$, then for $x = p^n y \in \Qp^\times$, $y \in
+\Zp^\times$. Then \[F^{\operatorname{ab}} = \Qp(\mu_\infty) = \bigcup \Qp(\mu_n) =
+\Qp^{\operatorname{nr}}(\mu_\infty).\] Then \[
+\restr{\operatorname{Art}_\rats(x)}{\Qp^{\operatorname{nr}}} =
+\operatorname{Frob}_p^n, \]
+and \[
+\restr{\operatorname{Art}_\rats(x)}{\Qp^{\operatorname{nr}}} = (\zeta_{p^n}
+\mapsto \zeta_{p^n}^{y \pmod{p^n}}). \]
+
+On the level of finite extensions, you can rephrase the first theorem as: for
+$E/F$ a finite Galois extension, we get $\operatorname{Art}_{E/F} :
+F^\times/N_{E/F}(E^\times) \longiso \gal{E}{F}^{\operatorname{ab}}$.
+
+Finally, we note that $\operatorname{Art}_F$ induces an isomorphism
+\[ \mathcal{O}_F \iso \im (I_F \rightarrow \Gamma_F^{\operatorname{ab}}), \]
+which sends 
+\[ (1 + \pi \mathcal{O}_F)^\times \longiso \im (P_F \rightarrow
+                                            \Gamma_F^{\operatorname{ab}}). \]
+Also, this is funtorial, namely if $F \iso F'$, and extend it to an isomorphism
+$\overline{F} \iso \overline{F'}$, which induces an isomorphism $\Gamma_F \iso
+\Gamma_{F'}$ up to conjugacy, calling the abelianization of this isomorphism
+$\alpha_*^{\operatorname{ab}}$, then
+\[ \alpha_*^{\operatorname{ab}} \circ \operatorname{Art}_F =
+  \operatorname{Art}_{F'} \circ \ \alpha_*^{\operatorname{ab}}. \]
+
+\subsection{Weil group of $F$} There is also a topological group $W_F$ (not
+profinite). Here we take $F$ to be a non-archimedean local field. It's related
+to the Galois group by the following. As an abstract group, \[
+  W_F = \{ \gamma \in \Gamma_F \ | \exists n \in \ints, \ \restr{\gamma}{F^{\operatorname{nr}}} =
+  \operatorname{Frob}_q^n \}. \]
+This contains $I_F$. To topologize it, we dictate that $I_F$ is an open subgroup
+with profinite topology. So $W_F$ is a fibred product of topological groups. 
+
+(see photo)
+
+We now give some motivation for this group. Then $\operatorname{Art}_F$ induces
+an isomorphism of topological groups \[ \operatorname{Art}_F^W : F^\times \longiso
+W_F^{\operatorname{ab}}. \] Then note that
+\begin{align*}
+  \operatorname{Art}_F : \mathcal{O}_F^\times & \longiso \operatorname{inertial
+  subgroup of } \Gamma_F^{\operatorname{ab}} \\ F^\times/\mathcal{O}_F^\times &
+  \iso \ints \rightarrow \gal{F^{\operatorname{nr}}}{F}.
+\end{align*}
+
+Now a comment on the proofs. There are two main proofs.
+\begin{enumerate}[(a)]
+  \item Cohomological, see Artin-Tate, Cassels-Frohlich. For $E/F$ finite and
+    Galois, we want to show that \[ \operatorname{Art}{E/F} : F^\times/N_{E/F}
+    E^\times \longiso \gal{E}{F}^{\operatorname{ab}}. \] It proceeds by noting
+    that the left-hand side has a group-cohomological interpretation, i.e. as
+    $\hat{H}^0(G, E^\times)$ where the hat refers to Tate cohomology. Then we
+    have that for $G = \gal{E}{F}$, $G^{\operatorname{ab}} = H_1(G, \ints) =
+    \hat{H}^{-2}(G, \ints)$. The main step is then to show that $H^2(G,
+    E^\times) = \hat{H}^2(G, E^\times) \iso \frac{1}{n} \ints/\ints \subset
+    \rats/\ints = H^2(\Gamma_F, \overline{F}^\times)$, the Brauer group
+    $\operatorname{Br}(F)$ of $F$. Then define $\operatorname{Art}_{E/F}^{-1}$
+    to be the product with geneartor of $\hat{H}^2(G, E^\times)$, which is a map
+    $\hat{H}^{-2}(G, \ints) \rightarrow \hat{H}^0(G, E^\times)$. It is then
+    rather formal that this is an isomorphism, and a bonus is that it
+    generalizes to duality theorems, where one looks at $H^*(G,
+    M)$ for some arbitrary $G$-module $M$. One issue however is that it is not
+    very explicit, and very much tied to abelian extensions.
+  \item The other approach is with formal groups. Recall that
+    $\Qp^{\operatorname{ab}} = \Qp^{\operatorname{nr}}(\mu_{p^\infty}) =
+    \Qp^{\operatorname{nr}}(\mathrm{torsion in } \hat{\mathbb{G}}_m),$ where
+    $\hat{\mathbb{G}}_m$ is roughly $(1 + \mathfrak{p}_{\overline{\Qp}})^\times
+    \supset \mu_{p^{\infty}}.$ This generalizes to any $F/\Qp$,
+    $F^{\operatorname{ab}} = F^{\operatorname{nr}}(\mathrm{torsion in }
+    \mathcal{G}_\pi)$, where $\mathcal{G}_\pi$ is the ``Lubin-Tate formal
+    group.'' Reference for this is Iwasawa, and a paper on LCFT by T. Yoshida.
+    The advantage of this is that it is explicit and gives both Artin map and
+    existence theorem. It has a natural generalization to non-abelian
+    extensions. The downside is that it doesn't give the duality theorems.
+  \item Finally, there is also Neukirch's method. Take $E/F$ abelian and finite.
+    Neukirch's idea is that for $g \in \gal{E}{F}$, there is only one
+    possibility for $\operatorname{Art}_{E/F}^{-1}(g) \in F^\times/N_{E/F}
+    E^\times$, due to the following lemma. There is only one possibility because
+    if we look at $\langle g \rangle = \gal{E}{F'} \subset \gal{E}{F}$ cyclic,
+    \begin{lem}
+      There exists a finite $K/F'$ such that $K \cap E = F'$, so $\gal{KE}{K}
+      \iso \langle g \rangle$, and $KE/K$ is unramified, and we have the diagram
+      in the photo. So we have to have $\restr{g'}{E} = g =
+      \operatorname{Frob}_{KE/K}^a$, and $\operatorname{Art}_{KE/K}^{-1}(g') =
+      \pi_K^a \pmod{N_{KE/K}(KE^\times)}.$ Hence $\operatorname{Art}_{E/F}^{-1}(g) =
+      N_{K/F}(\pi_K^a) \pmod{(N_{E/F}(E^\times)}.$ 
+    \end{lem}
+    The problem is to show that this doesn't depend on choices and is a
+    homomorphism. But so far we haven't used any number theory, and it's these
+    last two steps that involves the number theory.
+\end{enumerate}
+
+For completeness, we should also describe the archimedean setting. If $F$ is the
+complex numbers, then $W_{\mathbb{C}} = \mathbb{C}^\times$, and
+$\operatorname{Art}_{\mathbb{C}}^W$ is the identity map on $\cmplx$. If $F$ is
+the real numbers, then $\operatorname{Art}_F : \reals^\times \rightarrow
+\gal{\cmplx}{\reals} = \ints/2\ints$. Then $W_\reals = \langle \cmplx^\times,
+\sigma \ | \ \sigma^2 = -1 \in \cmplx^\times, \sigma z \sigma^{-1} = \conj{z}
+\forall z \in \cmplx^\times \rangle$. Thus we have the s.e.s.
+\[
+1 \rightarrow \cmplx^\times \rightarrow W_\reals \rightarrow \Gamma_\reals
+\rightarrow 1
+\]
+where we send $z \mapsto 0, \sigma \mapsto 1$. Then
+$\left(\operatorname{Art}_\reals^W\right)^{-1} : W_\reals^{\operatorname{ab}}
+\longiso \reals^\times$ by taking $z \mapsto z\conj{z}, \sigma \mapsto -1$.
+While these look ad-hoc, they are not.
+
+\subsection{Relative Weil groups} Suppose we took $F$ non-archimedean, $E/F$
+Galois. Define \[ W_{E/F} = \{ \gamma \in \gal{E^{\operatorname{ab}}}{F} \ | \
+\restr{\gamma}{F^{\operatorname{nr}}} = \operatorname{Frob}_q^n, n \in \ints \}
+ = W_F/\overline{[W_E, W_E]},
+\]
+topologized with quotient topology. Then $W_{\overline{F}/F} = W_F$ and
+$W_{F/F} \iso F^\times$ by local class field theory. Now take $E/F$ finite. Then
+we have \[
+1 \rightarrow \gal{E^{\operatorname{ab}}}{E} \rightarrow
+\gal{E^{\operatorname{ab}}}{F} \rightarrow \gal{E}{F} \rightarrow 1. \]
+\[ 1 \rightarrow W_E^{\operatorname{ab}} \iso E^\times \rightarrow W_{E/F} \rightarrow
+\gal{E}{F} \rightarrow 1. \]
+
+So $\varprojlim{E}, \varprojlim{\mathrm{norm}} E^\times = \{1 \}$. So
+$\overline{F}^\times$ is not visible in $W_F = \varprojlim W_{E/F}$.
+
+
+We get some equality in the short exact sequences if and only if element of
+\[H^2(\gal{E}{F}, E^\times) \iso \frac{1}{n} \ints/\ints.\]
+
+\subsection{Global Class Field Theory} By $K$ being a global field, we mean a
+number field or the function field of a smooth projective absolutely irreducible
+curve over a finite field.  Let $\Sigma_K$ be the set of places of $K$, and for
+a number field this can be split into $\Sigma_{K, \infty}$ the infinite places
+and $\Sigma_K^{\infty}$ the finite places, which are the embeddings into
+$\cmplx$ and the prime ideals of $\mathcal{O}_K$, respectively. For a function
+field, the places are parameterized by the closed points of $C$, which are also
+the orbits of $\overline{\mathbb{F}_q}$ under the action of
+$\gal{\overline{\mathbb{F}_q}}{\mathbb{F}_q}$.  Now if we have $v \in \Sigma_K$
+we can consider the inclusion $K \xhookrightarrow{} K_v$. Sometimes it's
+convenient to write $v | \infty$ to indicate that $K_v = \reals$ or $\cmplx$.
+If $v \in \Sigma_K^\infty$ then write $\mathcal{O}_v$ for the valuation ring of
+the completion.
+
+It's convenient to normalize absolute values associated to these valuations.
+There are two different ways to normalize over $p$-adic fields. Suppose $v$ is
+non-archimedean, then we have for $\pi_v$ a uniformizer, $K_v \supset
+\mathcal{O}_v \supset \pi_v \mathcal{O}_v$, and let $q_v = | \mathcal{O}_v /
+\pi_v \mathcal{O}_v | $. Then the normalized absolute value associated to $v$ is
+$|x|_v = q_v^{-v(x)}$. When $v$ is real, we take $|x|_v = |x|$. When $v$ is
+complex, we take $|x|_v = x \conj{x}$. Ultimately, the reason we choose these
+valuations is that if $x \in K^\times$, then \[ \prod_{v \in \Sigma_K} |x|_v = 1.\]
+
+\subsection{Adeles and Ideles} We write $\mathbb{A}_K$ for the restricted tensor
+product over all places of $K$. The restricted means that for all but finitely
+many $v \in \Sigma_K^\infty$, an element $(x_v)_v$, $x_v \in \mathcal{O}_v$.
+This is so that $\mathbb{A}_K$ is locally compact, and $\rats$ is actually
+discrete inside $\mathbb{A}_K$. Alternative notations for this are
+\begin{enumerate}[(1)]
+  \item $K_\infty \times \hat{K}$, where $K_\infty = \mathbb{A}_{K, \infty} =
+    \prod_{v | \infty} K_v = K \otimes_{\rats} \reals = \reals^{r_1} \times
+    \cmplx^{r_2}$, or nothing if $\operatorname{char} K > 0$. Also, $\hat{K} =
+    \mathbb{A}_K^\infty = \sum_{v | \infty}' K_v = \bigcup_{S \subset
+    \Sigma_K^\infty, |S| < \infty} \prod_S K_v \times \prod_{v \in
+    \Sigma_K^\infty \ S} \mathcal{O}_v$.  Within this, $\hat{\mathcal{O}_K} =
+    \prod_{v \not | \infty} \mathcal{O}_v$, which is the completion of
+    $\mathcal{O}_K$ is the number field case. More precisely, \[
+      \hat{\mathcal{O}_K} = \varprojlim_{\mathfrak{a}} \mathcal{O}_K/\mathfrak{a}
+      = \varprojlim_{N} \mathcal{O}_K/N\mathcal{O}_K = \mathcal{O}_K
+      \otimes_\ints \hat{\ints}. \]
+  \item $\mathbb{A}_{K, \infty} \times \mathbb{A}_K^\infty.$
+\end{enumerate}
+The ideles, or $J_K = \mathbb{A}_K^\times = \prod'_v K_v^\times$, where almost
+every entry is in $\mathcal{O}_v^\times$.
+
+The topology on the adeles is taken so that $K_\infty \times
+\hat{\mathcal{O}_K}$ to be open with the product topology. The topology on the
+ideles is given in the same way, by taking $K_\infty^\times \times
+\hat{\mathcal{O}_K}^\times$ to be open with the product topology. However, this
+topology on $J_K$ is not the induced topology given by the inclusion. It is
+actually the one indued from taking $J_K \xhookrightarrow{} \mathbb{A}_K \times
+\mathbb{A}_K$ taking $x \mapsto (x, x^{-1})$. This is similar in how we make
+$GL_n$ an affine variety.
+
+A basic fact is that $K^\times \subset J_K$ is a discrete subgroup, and the
+idele class group is $C_K = J_K / K^\times$. This comes with a continuous
+homomorphism \[ | \cdot |_{\mathbb{A}_K} : (x_v)_v \mapsto \prod_{v \in
+\Sigma_K} |x_v|_v, \] which defines a map $| \cdot |_{\mathbb{A}} : C_K
+\rightarrow \mathbb{R}^\times_{> 0}$, with \emph{compact} kernel! This is the
+conjunction of two theorems: finiteness of the class number and Dirichlet's unit
+theorem.
+
+Let's look at $K = \rats$ and $J_{\rats} = \reals^\times \times
+\prod_p ' \Qp^\times$. Then there exists a unique $y \in \rats^\times$ such that
+$\operatorname{sgn}(y) = \operatorname{sgn}(x_\infty)$ and for all $p$, $v_p(y)
+= v_p(x_p)$. We can actually write $J_\rats = \rats^\times \times
+(\reals^\times_{> 0} \times \prod_p \Zp^\times)$, which the product of a
+discrete and locally compact, so \[ C_\rats = \reals^\times_{> 0} \times
+\hat{\ints}^\times = \reals^\times_{> 0} \times \ker | \cdot |_\mathbb{A}. \]
+Now $C_\rats \supset \reals^\times_{> 0}$ is the maximal connected subgroup and
+the intersection of all open subgroups containing 1. The other piece is totally
+disconnected as it's profinite. Also, $\pi_0 (C_K) = C_K / C_K^0$, so
+$\pi_0(C_\rats) = \hat{\ints}^\times \iso \gal{\rats(\{\mu_n\}_n)}{\rats}.$ So
+global class field theory is just a generalization of this to all number fields.
+
+We elaborate on this remark. For $L/K$ finite Galois, $v$ a place of $K$, place
+$w | v$ of $L$ (for infinite places this just means that $L \xhookrightarrow{}
+L_w = \reals$ or $\cmplx$ extends $K \xhookrightarrow{} K_v$. Then we have the
+decomposition group \[ \gal{L_w}{K_v} \subset \gal{L}{K}.  \] If $L/K$ is
+abelian, this depends only on $v$. Now we can define the global Artin map \[
+  \operatorname{Art}_{L/K} : J_K \rightarrow \gal{L}{K}, \] if $L/K$ is abelian.
+Note that if $x_v \in \mathcal{O}_v^\times$, where $L/K$ is unramified at $v \in
+\Sigma_K^\infty$, then $\operatorname{Art}_{L_w}{K_v} (x_v) = 1$. So we can
+define for an arbitrary idele, \[ \operatorname{Art}_{L/K}((x_v)_v) = \prod_v
+\operatorname{Art}_{L_w/K_v} (x_v).  \] Now if we pass to the limit over $L/K$,
+we get \[ \operatorname{Art}_K : J_K \rightarrow \Gamma_K^{\mathrm{ab}}. \] As
+an exercise, check continuity of these maps.
+
+Then we have the following
+\begin{thm}[Artin Reciprocity]
+  $\operatorname{Art}_K(K^\times) = \{1 \}$, so defines a map
+  $\operatorname{Art}_K : C_K \rightarrow \Gamma_K^{\mathrm{ab}}.$
+\end{thm}
+
+Something about something being profinite, so this can't be an isomorphism of
+topological groups. So we need to look at kernel and image.
+
+
+

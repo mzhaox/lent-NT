@@ -1,0 +1,224 @@
+\documentclass[12pt,reqno]{amsart}
+% Symbols
+\usepackage{amsmath, amsthm, amssymb}
+\usepackage{mathtools}
+\usepackage{bbm}
+\usepackage{stmaryrd}
+
+% Style
+\usepackage[margin=1in]{geometry}
+\usepackage{parskip}
+\usepackage[shortlabels]{enumitem}
+
+% Colored text
+\usepackage{color}
+
+% Links
+\usepackage[bookmarks,colorlinks,breaklinks]{hyperref}
+% PDF hyperlinks, with coloured links
+\hypersetup{linkcolor=red,citecolor=blue,
+  filecolor=dullmagenta,urlcolor=darkblue}
+
+% Bibliography and references
+\usepackage[numbers]{natbib}
+\usepackage{cleveref}
+
+% Figures
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{matrix, arrows}
+\usetikzlibrary{cd}
+
+\usepackage{bbm}
+
+\makeatletter
+\def\thm@space@setup{%
+  \thm@preskip=0.5em\thm@postskip=\thm@preskip%
+}
+\makeatother
+% Unnamed theorem without counter
+\newtheorem*{theorem}{Theorem}
+\newtheoremstyle{named}{}{}{\\itshape}{}{\bfseries}{.}{.5em}{\thmnote{#3's }#1}
+% Named theorem without counter
+\theoremstyle{named}
+\newtheorem*{namedtheorem}{Theorem}
+% Other theorem environments
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{cor}[thm]{Corollary}
+\theoremstyle{definition}
+\newtheorem{defn}[thm]{Definition}
+\newtheorem{ex}[thm]{Exercise}
+\newtheorem{exmpl}[thm]{Example}
+\newtheorem{fact}{Fact}
+\theoremstyle{remark}
+\newtheorem{rmk}[thm]{Remark}
+\crefformat{footnote}{#2\footnotemark[#1]#3}
+
+% Grothendieck group
+\newcommand{\ggroup}{K_0}
+
+% GL_n
+\newcommand{\gl}[2]{\mathrm{GL}_{#1}({#2})}
+% SL_n
+\renewcommand{\sl}[2]{\mathrm{SL}_{#1}({#2})}
+% SO_n
+\newcommand{\so}[2]{\mathrm{SO}_{#1}({#2})}
+% Sp_n
+\renewcommand{\sp}[2]{\mathrm{Sp}_{#1}({#2})}
+% G_m
+\newcommand{\gm}{\mathbb{G}_m}
+
+% Trace
+\newcommand{\tr}{\operatorname{tr}}
+
+% Conjugation
+\newcommand{\conj}[1]{\overline{#1}}
+% Class group
+\newcommand{\cl}[1]{{\mathrm{Cl}{(#1)}}}
+% Order of a field
+\newcommand{\roi}[1]{\mathcal{O}_{#1}}
+
+% Galois group of L/K
+\newcommand{\gal}[2]{\mathrm{Gal}{(#1 / #2)}}
+
+% Rationals
+\newcommand{\rats}{\mathbb{Q}}
+% Real numbers
+\newcommand{\reals}{\mathbb{R}}
+% Nonnegative real numbers
+\newcommand{\nnreals}{\mathbb{R}^{\geq{0}}}
+% Complex numbers
+\newcommand{\cmplx}{\mathbb{C}}
+% Integers
+\newcommand{\ints}{\mathbb{Z}}
+% p-adic rationals
+\newcommand{\Qp}{\rats_p}
+\newcommand{\Zp}{\ints_p}
+% matrices
+\newcommand{\bp}{\begin{pmatrix}}
+\newcommand{\ep}{\end{pmatrix}}
+%fonts
+\newcommand{\mc}{\mathcal}
+\newcommand{\mf}{\mathfrak}
+
+
+% Algebraic number theory
+%  Prime ideals
+\newcommand{\prim}{\mathfrak{p}} % \prime is the symbol: '
+\newcommand{\oprime}{\mathfrak{P}}
+\newcommand{\oprimealt}{\oprime^o}
+
+% Frobenius map
+\newcommand{\frob}[1]{\mathrm{Fr}_{#1}}
+% Legendre symbol
+\newcommand{\legndr}[2]{\left(\dfrac{#1}{#2}\right)}
+% Norm, with the fields understood
+\newcommand{\N}[1]{N{(#1)}}
+
+% Integers modulo a given number
+\newcommand{\Zmod}[1]{\mathbb{Z}/#1 \mathbb{Z}}
+% Units of integers mod n
+\newcommand{\Zmodu}[1]{\left(\mathbb{Z}/#1 \mathbb{Z}\right)^\times}
+
+% Langlands dual
+\newcommand{\langdual}[1]{{#1}^\vee}
+
+% Category of representations
+\newcommand{\rep}{\mathrm{Rep}}
+
+% Character group of a group
+\newcommand{\cgroup}[1]{X^\bullet(#1)}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Ind}{\operatorname{Ind}}
+\newcommand{\aut}{\operatorname{Aut}}
+\newcommand{\into}{\operatorname{End}}
+\newcommand{\Stab}{\text{Stab}}
+\newcommand{\lsurj}{\twoheadleftarrow}
+\newcommand{\rsurj}{\twoheadrightarrow}
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+}}
+
+
+\newcommand{\spec}[1]{\mathrm{Spec}({#1})}
+
+
+\newcommand{\op}[1]{\operatorname{#1}}
+% Affine Grassmannian of a group
+\newcommand{\gr}[1]{\mathrm{Gr}_{#1}}
+
+% Category of perverse sheaves
+\newcommand{\perv}{\mathrm{Perv}}
+% Regular-sized isomorphism.
+\newcommand{\iso}{\simeq}
+
+% A large, noticeable quotient
+\newcommand{\quotient}[2]{{\raisebox{.2em}{$#1$}
+                           \left/\raisebox{-.2em}{$#2$}\right.}}
+
+% Experimental big isomorphism commands.
+
+% Bigger isomorphism (with arrow).
+\newcommand{\longiso}{\stackrel{\sim}{\longrightarrow}}
+
+% Very big isomorphism (no arrow).
+\makeatletter
+\newcommand*{\isomorphism}{%
+  \mathrel{%
+    \mathpalette\@isomorphism{}%
+  }%
+}
+\newcommand*{\@isomorphism}[2]{%
+  % Calculate the amount of moving \sim up as in \simeq
+  \sbox0{$#1\simeq$}%
+  \sbox2{$#1\sim$}%
+  \dimen@=\ht0 %
+  \advance\dimen@ by -\ht2 %
+  %
+  % Compose the two symbols
+  \sbox0{%
+    \lower1.9\dimen@\hbox{%
+      $\m@th#1\relbar\isomorphism@joinrel\relbar$%
+    }%
+  }%
+  \rlap{%
+    \hbox to \wd0{%
+      \hfill\raise\dimen@\hbox{$\m@th#1\sim$}\hfill
+    }%
+  }%
+  \copy0 %
+}
+\newcommand*{\isomorphism@joinrel}{%
+  \mathrel{%
+    \mkern-3.4mu %
+    \mkern-1mu %
+    \nonscript\mkern1mu %
+  }%
+}
+\makeatother
+
+\newcommand{\arrowcircle}[1][]{%
+  \begin{tikzpicture}[#1]
+    \draw[right hook->] (0,0ex) -- (2em,0ex);
+    \draw (1em,0ex) circle (0.5ex);
+  \end{tikzpicture}%
+}
+
+\newcommand{\catname}[1]{{\textsf{{#1}}}}
+\newcommand{\Ab}{\catname{Ab}} % category of abelian groups
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\RHom}{\mathrm{RHom}}
+\newcommand{\qiso}{\stackrel{\longrightarrow}{\sim}}
+\newcommand{\Sh}{\catname{Sh}}
+\newcommand{\iHom}{\mathcal{H}om}
+
+\title{Math 7890, Utah Spring 2017: Introduction to the geometric Satake correspondence}
